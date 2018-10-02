@@ -1,80 +1,97 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://mms.mypetrol.net/
 
-# mms
+# MMS
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Modular Management System API
 
-## Questions Collection [/questions]
+# Data Structures
 
-### List All Questions [GET]
+## Module (object) - Definition of single module
+
++ name: divisions (string, required) - Name of the module
++ caption: Střediska (string, required) - Caption of the module
++ hasGrid: true (boolean, required) - Flag saying if the module has grid
++ hasDetail: true (boolean, required) - Flag saying if the module has detail
++ keyField: divisionId (string, required) - Name of field that is primary key
++ fields (array)
+    + (Field)
++ actions (array)
+    + (Action)
+
+## Field (object) - Definition of object field
++ name: divisionName (string, required) - Name of the field
++ caption: Název střediska (string, required) - Caption of the field
++ category: Hlavní (string, optional) - Main category caption
++ subcategory: Obecné (string, optional) - Subcategory caption
++ type: date (Data type, required) - Field data type
++ displayFormat: dd.mm.yyy (string, optional) - Display format
++ decimals: 2 (number, optional) - Number of valid decimal places
++ isInGrid: true (boolean, optional) - Flag saying if this field is in grid, default is false
++ isFilter: true (boolean, optional) - Flag saying if this field can be used to filter data
++ restrictions (Restrictions, optional) - Validating restrictions, value is valid if is empty or all restrictions are fullfiled
++ options (array, optional)
+    + (Option)
++ optionsUrl: /api/availableOptions (string, optional) - Url where to obtain available options
++ defaultValue: monday (string, optional) - Default value
+
+## Option (object) - Available selection option
++ value: monday (string, required) - Value of selected option
++ caption: Pondělí (string, required) - Caption of this option
+
+## Restrictions (object) - Validating restrictions
++ required: true (boolean, optional) - If true, this field cannot be empty
++ minValue: 0 (number, optional) - Minimal value for numbers
++ maxValue: 100 (number, optional) - Maximal value for numbers
++ minValueExclusive: false (boolean, optional) - Flag saying if minValue is inclusive or exclusive, default is false
++ maxValueExclusive: false (boolean, optional) - Flag saying if maxValue is inclusive or exclusive, default is false
++ minLength: 0 (number, optional) - Minimal length of entered value
++ maxLength: 16 (number, optional) - Maximal length of entered value
++ regex: .+@.+\..+ (string, optional) - Regex to validate value
++ invalidLengthMessage: Maximální délka je 16 znaků (string, optional) - Message text when value length is out of bounds
++ invalidValueMessage: Zadaná hodnota není platné datum (string, optional) - Message text when value is out of bounds
++ invalidRegexMessage: Zadaná emailová adresa není platná (string, optional) - Message text when value doesn't match regex pattern
+
+## Action (object) - Actions available in module
++ name: blockDivision (string, required) - Action identifier
++ caption: Blokace střediska (string, required) - Action caption
++ type: block (string, required) - Action type for choosing icon and other behaviour, ie. opening empty detail for new object
++ url: /api/{module}/{id}/{action} (string, required) - Url of this action, available variables are module, id, action for module name, object id based on primary key and action name
++ method: DELETE (string, optional) - Method of HTTP request, default is POST
++ enableFieldName: allowBlockDivision (string, optional) - Based on this field will be action enabled. By default action is enabled
++ message: Přejete si zablokovat středisko {divisionNumber} - {divisionName}? (string, optional) - Message displayed in confirmation dialog, variables are field names
++ enabled: true (boolean, optional) - Flag saying if this action is enabled (ie. if user doesn't have permission)
++ parameters (array) - Parameters to be filled in dialog
+    + (Field)
+
+## Data type (enum) - Field data types
+    + Members
+        + number
+        + text
+        + date
+        + time
+        + datetime
+        + boolean
+
+
+## Modules Collection [/api/modules]
+
+### List All Modules [GET]
+
+Definition of all modules with all actions and fields.
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+    + Attributes (array)
+        + (Module)
 
-### Create a New Question [POST]
+### Get single module [GET /api/modules/{name}]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Definition of single module with all actions and fields.
 
-+ Request (application/json)
++ Parameters
+    + name (string, required)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
++ Response 200 (application/json)
 
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+    + Attributes (Module)
