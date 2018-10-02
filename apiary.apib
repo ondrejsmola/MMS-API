@@ -7,7 +7,7 @@ Modular Management System API
 
 # Data Structures
 
-## Module (object) - Definition of single module
+### Module (object) - Definition of single module
 
 + name: divisions (string, required) - Name of the module
 + caption: Střediska (string, required) - Caption of the module
@@ -19,7 +19,7 @@ Modular Management System API
 + actions (array)
     + (Action)
 
-## Field (object) - Definition of object field
+### Field (object) - Definition of object field
 + name: divisionName (string, required) - Name of the field
 + caption: Název střediska (string, required) - Caption of the field
 + category: Hlavní (string, optional) - Main category caption
@@ -35,11 +35,11 @@ Modular Management System API
 + optionsUrl: /api/availableOptions (string, optional) - Url where to obtain available options
 + defaultValue: monday (string, optional) - Default value
 
-## Option (object) - Available selection option
+### Option (object) - Available selection option
 + value: monday (string, required) - Value of selected option
 + caption: Pondělí (string, required) - Caption of this option
 
-## Restrictions (object) - Validating restrictions
+### Restrictions (object) - Validating restrictions
 + required: true (boolean, optional) - If true, this field cannot be empty
 + minValue: 0 (number, optional) - Minimal value for numbers
 + maxValue: 100 (number, optional) - Maximal value for numbers
@@ -52,7 +52,7 @@ Modular Management System API
 + invalidValueMessage: Zadaná hodnota není platné datum (string, optional) - Message text when value is out of bounds
 + invalidRegexMessage: Zadaná emailová adresa není platná (string, optional) - Message text when value doesn't match regex pattern
 
-## Action (object) - Actions available in module
+### Action (object) - Actions available in module
 + name: blockDivision (string, required) - Action identifier
 + caption: Blokace střediska (string, required) - Action caption
 + type: block (string, required) - Action type for choosing icon and other behaviour, ie. opening empty detail for new object
@@ -64,7 +64,7 @@ Modular Management System API
 + parameters (array) - Parameters to be filled in dialog
     + (Field)
 
-## Data type (enum) - Field data types
+### Data type (enum) - Field data types
     + Members
         + number
         + text
@@ -74,7 +74,7 @@ Modular Management System API
         + boolean
 
 
-## Modules Collection [/api/modules]
+# Modules Collection [/api/modules]
 
 ### List All Modules [GET]
 
