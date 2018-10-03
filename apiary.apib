@@ -63,6 +63,16 @@ Modular Management System API
 + enabled: true (boolean, optional) - Flag saying if this action is enabled (ie. if user doesn't have permission)
 + parameters (array) - Parameters to be filled in dialog
     + (Field)
+    
+### Menu (array) - Applicatin menu
++ (Menu item)
+
+### Menu item (object) - Menu item
++ caption: Střediska (string, required) - Caption of menu item
++ icon: divisions (string, optional) - Icon identifier to be used for this menu item
++ module: divisions (string, optional) - Reference to module by name. Items with subitems do not have module reference
++ items (array, optional) - Collection of menu subitems
+    + (Menu item)
 
 ### Data type (enum) - Field data types
     + Members
@@ -74,9 +84,9 @@ Modular Management System API
         + boolean
 
 
-# Modules Collection [/api/modules]
+# Modules [/api/modules]
 
-### List All Modules [GET]
+### List all modules [GET]
 
 Definition of all modules with all actions and fields.
 
@@ -95,3 +105,13 @@ Definition of single module with all actions and fields.
 + Response 200 (application/json)
 
     + Attributes (Module)
+
+# Menu [/api/menu]
+
+### Get application menu [GET]
+
+Receive menu structure with names of modules
+
++ Response 200 (application/json)
+
+    + Attributes (Menu)
