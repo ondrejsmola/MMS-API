@@ -115,3 +115,62 @@ Receive menu structure with names of modules
 + Response 200 (application/json)
 
     + Attributes (Menu)
+    
+    + Body
+    
+            [
+                {
+                    "caption" : "Skupiny zákazníků"
+                },
+                {
+                    "caption" : "Zákazníci",
+                    "items" : [
+                        {
+                            "caption" : "Zákazníci business",
+                            "module" : "companyBusiness"
+                        },
+                        {
+                            "caption" : "Zákazníci EASY",
+                            "module" : "companyEasy"
+                        }
+                    ]
+                },
+                {
+                    "caption" : "Střediska",
+                    "items" : [
+                        {
+                            "caption" : "Střediska business",
+                            "module" : "divisionsBusiness"
+                        },
+                        {
+                            "caption" : "Střediska EASY",
+                            "module" : "divisionsEasy"
+                        },
+                        {
+                            "caption" : "Distributoři",
+                            "module" : "distributors"
+                        }
+                    ]
+                },
+                {
+                    "caption" : "Karty"
+                },
+                {
+                    "caption" : "Účtování"
+                },
+                {
+                    "caption" : "Cenotvorba"
+                },
+                {
+                    "caption" : "Banka"
+                },
+                {
+                    "caption" : "Nastavení"
+                },
+                {
+                    "caption" : "Fleet operátoři"
+                },
+                {
+                    "caption" : "Akceptanti"
+                }
+            ]
