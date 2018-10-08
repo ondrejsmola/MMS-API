@@ -102,6 +102,114 @@ Definition of all modules with all actions and fields.
 
     + Attributes (array)
         + (Module)
+    
+    + Body
+    
+            [
+                {
+                  "name": "divisionsBusiness",
+                  "caption": "Střediska business",
+                  "hasGrid": true,
+                  "hasDetail": true,
+                  "keyField": "divisionId",
+                  "categories" : [
+                    {
+                        "key": 1,
+                        "caption": "Hlavní",
+                        "categories": [
+                            {
+                                "key": 2,
+                                "caption": "Obecné"
+                            }
+                        ]
+                    },
+                    {
+                        "key": 3,
+                        "caption": "Aktuální stav"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "divisionId",
+                      "caption": "Číslo střediska",
+                      "editable" : false,
+                      "category": 2,
+                      "type": "number",
+                      "isInGrid": true,
+                      "isFilter": true
+                    },
+                    {
+                      "name": "divisionName",
+                      "caption": "Název střediska",
+                      "editable": true,
+                      "category": 2,
+                      "type": "text",
+                      "isInGrid": true,
+                      "isFilter": true,
+                      "restrictions": {
+                        "required": true,
+                        "maxLength": 64
+                      }
+                    },
+                    {
+                      "name": "cardCount",
+                      "caption": "Počet karet",
+                      "editable": false,
+                      "category": 3,
+                      "type": "number",
+                      "isInGrid": true,
+                      "isFilter": false
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "name": "blockDivision",
+                      "caption": "Blokace střediska",
+                      "type": "block",
+                      "url": "/api/{module}/{id}/{action}",
+                      "method": "DELETE",
+                      "enableFieldName": "allowBlockDivision",
+                      "message": "Přejete si zablokovat středisko {divisionNumber}",
+                      "enabled": true,
+                      "parameters": [
+                        {
+                          "name": "divisionName",
+                          "caption": "Název střediska",
+                          "category": "Hlavní",
+                          "subcategory": "Obecné",
+                          "type": "date",
+                          "displayFormat": "dd.mm.yyy",
+                          "decimals": 2,
+                          "isInGrid": true,
+                          "isFilter": true,
+                          "restrictions": {
+                            "required": true,
+                            "minValue": 0,
+                            "maxValue": 100,
+                            "minValueExclusive": false,
+                            "maxValueExclusive": false,
+                            "minLength": 0,
+                            "maxLength": 16,
+                            "regex": ".+@.+..+",
+                            "invalidLengthMessage": "Maximální délka je 16 znaků",
+                            "invalidValueMessage": "Zadaná hodnota není platné datum",
+                            "invalidRegexMessage": "Zadaná emailová adresa není platná"
+                          },
+                          "options": [
+                            {
+                              "value": "monday",
+                              "caption": "Pondělí"
+                            }
+                          ],
+                          "optionsUrl": "/api/availableOptions",
+                          "defaultValue": "monday"
+                        }
+                      ]
+                    }
+                  ]
+                }
+            ]
+
 
 ### Get single module [GET /api/modules/{name}]
 
@@ -153,7 +261,7 @@ Definition of single module with all actions and fields.
                   "caption": "Název střediska",
                   "editable": true,
                   "category": 2,
-                  "type": "string",
+                  "type": "text",
                   "isInGrid": true,
                   "isFilter": true,
                   "restrictions": {
