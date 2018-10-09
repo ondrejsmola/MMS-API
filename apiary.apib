@@ -92,6 +92,11 @@ Modular Management System API
         + boolean
 
 
+### Login (object) - Information to authenticate user
++ userName: admin (string, required) - User name
++ password: Password. (string, required) - User password
++ permanent: true (boolean, required) - User will be logged in permanently
+
 # Modules [/api/modules]
 
 ### List all modules [GET]
@@ -395,3 +400,24 @@ Receive menu structure with names of modules
                     "caption" : "Akceptanti"
                 }
             ]
+
+
+# Login [/api/login]
+
+### Login user [POST]
+
+Authenticate user
+
++ Attributes (Login)
+
++ Request (application/json)
+
++ Response 200
+
+# Logout [/api/logout]
+
+### Logout user [GET]
+
+Logout current user
+
++ Response 200
