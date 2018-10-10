@@ -421,3 +421,21 @@ Authenticate user
 Logout current user
 
 + Response 200
+
+# Environment [/api/environment]
+
+### Environment info [GET]
+
+Get environment information like version, theme etc.
+
++ Response 200 (application/javascript)
+
+    + Body
+    
+            const environment = {
+                version: "3.2.15.26",
+                theme: {
+                    primary: "#3f51b5",
+                    secondary: "#f50057"
+                }
+            }
